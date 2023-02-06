@@ -1,6 +1,7 @@
 ---
 
 name: 'Run Testing Farm as GitHub Action for SCLOrg use-cases'
+description: 'This wrapper tries to minimize lines of code needed to be written in each container repository when calling TFaGA. This should lead to code reduction, duplicity removal, easier maintaining and adding features.'
 author: 'RHSCL team'
 
 inputs:
