@@ -7,8 +7,8 @@ all_os="$public_ranch $private_ranch"
 os_test="$1"   # options: centos7, c9s, fedora, rhel7, rhel8, rhel9, rhel9-unsubscribed
 test_case="$2" # options: container, openshift
 if [ -z "$os_test" ] || ! echo "$all_os" | grep -q "$os_test" ; then
-  echo "os_test '$os_test' is not valid"
-  echo "choose one of: $all_os"
+  echo "::error::os_test '$os_test' is not valid"
+  echo "::warning::choose one of: $all_os"
   exit 5
 fi
 
@@ -29,7 +29,7 @@ elif [ "$test_case" = openshift ] ; then
     test_name="test-openshift-4"
   fi
 else
-  echo "test_case '$test_case' is not valid"
+  echo "::error::test_case '$test_case' is not valid"
   exit 5
 fi
 

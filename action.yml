@@ -46,7 +46,7 @@ runs:
         elif [ "${{ steps.vars.outputs.api_key }}" == "TF_PRIVATE_API_KEY" ]; then
           echo "value=${{ inputs.private_api_key }}" >> "$GITHUB_OUTPUT"
         else
-          echo "err, invalid API_KEY value" >&2
+          echo "::error::invalid API_KEY value" >&2
           exit 2
         fi
 
