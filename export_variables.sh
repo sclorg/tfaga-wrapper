@@ -72,7 +72,7 @@ case "$os_test" in
   "rhel7")
     tmt_plan="rhel7$tmt_plan_suffix"
     context="RHEL7$context_suffix"
-    compose="RHEL-7.9-Released"
+    compose="RHEL-7-LatestUpdated"
     ;;
   "rhel8")
     tmt_plan="rhel8$tmt_plan_suffix"
