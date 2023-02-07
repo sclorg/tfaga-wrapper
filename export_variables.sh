@@ -5,7 +5,7 @@ private_ranch="rhel7 rhel8 rhel9 rhel9-unsubscribed"
 all_os="$public_ranch $private_ranch"
 
 os_test="$1"   # options: centos7, c9s, fedora, rhel7, rhel8, rhel9, rhel9-unsubscribed
-test_case="$2" # options: container, openshift
+test_case="$2" # options: container, openshift, openshift-4
 if [ -z "$os_test" ] || ! echo "$all_os" | grep -q "$os_test" ; then
   echo "::error::os_test '$os_test' is not valid"
   echo "::warning::choose one of: $all_os"
@@ -13,21 +13,25 @@ if [ -z "$os_test" ] || ! echo "$all_os" | grep -q "$os_test" ; then
 fi
 
 # container tests vs openshift tests
-if [ -z "$test_case" ] || [ "$test_case" = "container" ] ; then
-  test_case="container"
-  tmt_plan_suffix="-docker"
-  context_suffix=""
-  test_name="test"
-elif [ "$test_case" = openshift ] ; then
-  if [ "$os_test" = "centos7" ] || [ "$os_test" = "rhel7" ] ; then
-    context_suffix=" - OpenShift 3"
-    tmt_plan_suffix="-openshift-3"
-    test_name="test-openshift-3"
-  else
-    context_suffix=" - OpenShift 4"
-    tmt_plan_suffix="-openshift4"
-    test_name="test-openshift-4"
-  fi
+if [ -z "$test_case" ] ; then
+  case "$test_case" in
+    "container")
+      test_case="container"
+      tmt_plan_suffix="-docker"
+      context_suffix=""
+      test_name="test"
+      ;;
+    "openshift")
+      context_suffix=" - OpenShift 3"
+      tmt_plan_suffix="-openshift-3"
+      test_name="test-openshift"
+      ;;
+    "openshift-4")
+      context_suffix=" - OpenShift 4"
+      tmt_plan_suffix="-openshift-4"
+      test_name="test-openshift-4"
+      ;;
+  esac
 else
   echo "::error::test_case '$test_case' is not valid"
   exit 5
