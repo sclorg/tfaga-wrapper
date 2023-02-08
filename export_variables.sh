@@ -13,29 +13,35 @@ if [ -z "$os_test" ] || ! echo "$all_os" | grep -q "$os_test" ; then
 fi
 
 # container tests vs openshift tests
+
 if [ -z "$test_case" ] ; then
-  case "$test_case" in
-    "container")
-      test_case="container"
-      tmt_plan_suffix="-docker"
-      context_suffix=""
-      test_name="test"
-      ;;
-    "openshift")
-      context_suffix=" - OpenShift 3"
-      tmt_plan_suffix="-openshift-3"
-      test_name="test-openshift"
-      ;;
-    "openshift-4")
-      context_suffix=" - OpenShift 4"
-      tmt_plan_suffix="-openshift-4"
-      test_name="test-openshift-4"
-      ;;
-  esac
-else
   echo "::error::test_case '$test_case' is not valid"
   exit 5
 fi
+case "$test_case" in
+  "container")
+    test_case="container"
+    tmt_plan_suffix="-docker"
+    context_suffix=""
+    test_name="test"
+    ;;
+  "openshift")
+    context_suffix=" - OpenShift 3"
+    tmt_plan_suffix="-openshift-3"
+    test_name="test-openshift"
+    ;;
+  "openshift-4")
+    context_suffix=" - OpenShift 4"
+    tmt_plan_suffix="-openshift-4"
+    test_name="test-openshift-4"
+    ;;
+  *)
+    echo "::error::test_case '$test_case' is not valid"
+    exit 5
+    ;;
+esac
+
+
 
 # public vs private ranch
 if echo "$public_ranch" | grep -q "$os_test" ; then
