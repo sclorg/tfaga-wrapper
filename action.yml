@@ -12,7 +12,7 @@ inputs:
     description: 'centos7/c9s/fedora/rhel7/rhel8/rhel9/rhel9-unsubscribed'
     required: true
   test_case:
-    description: 'container/openshift'
+    description: 'container/openshift-3/openshift-4'
     required: true
   public_api_key:
     description: ''
