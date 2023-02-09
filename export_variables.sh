@@ -5,7 +5,7 @@ private_ranch="rhel7 rhel8 rhel9 rhel9-unsubscribed"
 all_os="$public_ranch $private_ranch"
 
 os_test="$1"   # options: centos7, c9s, fedora, rhel7, rhel8, rhel9, rhel9-unsubscribed
-test_case="$2" # options: container, openshift, openshift-4
+test_case="$2" # options: container, openshift-3, openshift-4
 if [ -z "$os_test" ] || ! echo "$all_os" | grep -q "$os_test" ; then
   echo "::error::os_test '$os_test' is not valid"
   echo "::warning::choose one of: $all_os"
@@ -13,11 +13,6 @@ if [ -z "$os_test" ] || ! echo "$all_os" | grep -q "$os_test" ; then
 fi
 
 # container tests vs openshift tests
-
-if [ -z "$test_case" ] ; then
-  echo "::error::test_case '$test_case' is not valid"
-  exit 5
-fi
 case "$test_case" in
   "container")
     test_case="container"
@@ -25,7 +20,7 @@ case "$test_case" in
     context_suffix=""
     test_name="test"
     ;;
-  "openshift")
+  "openshift-3")
     context_suffix=" - OpenShift 3"
     tmt_plan_suffix="-openshift-3"
     test_name="test-openshift"
@@ -35,7 +30,7 @@ case "$test_case" in
     tmt_plan_suffix="-openshift-4"
     test_name="test-openshift-4"
     ;;
-  *)
+  ""|*)
     echo "::error::test_case '$test_case' is not valid"
     exit 5
     ;;
@@ -96,6 +91,10 @@ case "$os_test" in
     tmt_plan="rhel9-unsubscribed-docker"
     context="RHEL9 - Unsubscribed host"
     compose="RHEL-9.1.0-Nightly"
+    ;;
+  ""|*)
+    echo "::error::os_test '$os_test' is not valid"
+    exit 5
     ;;
 esac
 
