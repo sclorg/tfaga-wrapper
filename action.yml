@@ -52,13 +52,13 @@ runs:
 
     - name: Check if ${{ inputs.version }}/${{ steps.vars.outputs.dockerfile }} is present
       id: check_dockerfile
-      uses: andstor/file-existence-action@v1
+      uses: andstor/file-existence-action@v2
       with:
         files: "${{ inputs.version }}/${{ steps.vars.outputs.dockerfile }}"
 
     - name: Check .exclude-${{ steps.vars.outputs.os_test }} file presents
       id: check_exclude_file
-      uses: andstor/file-existence-action@v1
+      uses: andstor/file-existence-action@v2
       with:
         files: "${{ inputs.version }}/.exclude-${{ steps.vars.outputs.os_test }}"
 
