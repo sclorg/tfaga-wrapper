@@ -40,12 +40,12 @@ esac
 
 # public vs private ranch
 if echo "$public_ranch" | grep -q "$os_test" ; then
-  api_key="TF_PUBLIC_API_KEY"
+  api_key="public_api_key"
   branch="main"
   tf_scope="public"
   tmt_repo="https://github.com/sclorg/sclorg-testing-farm"
 else
-  api_key="TF_PRIVATE_API_KEY"
+  api_key="private_api_key"
   branch="master"
   tf_scope="private"
   tmt_repo="https://gitlab.cee.redhat.com/platform-eng-core-services/sclorg-tmt-plans"
