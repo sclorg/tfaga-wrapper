@@ -1,10 +1,10 @@
 #!/bin/sh
 
-public_ranch="centos7 c9s fedora"
+public_ranch="centos7 c8s c9s fedora"
 private_ranch="rhel7 rhel8 rhel9 rhel9-unsubscribed"
 all_os="$public_ranch $private_ranch"
 
-os_test="$1"   # options: centos7, c9s, fedora, rhel7, rhel8, rhel9, rhel9-unsubscribed
+os_test="$1" # options: centos7, c8s, c9s, fedora, rhel7, rhel8, rhel9, rhel9-unsubscribed
 test_case="$2" # options: container, openshift-3, openshift-4
 if [ -z "$os_test" ] || ! echo "$all_os" | grep -q "$os_test" ; then
   echo "::error::os_test '$os_test' is not valid"
@@ -64,6 +64,11 @@ case "$os_test" in
     tmt_plan="c9s"
     context="CentOS Stream 9"
     compose="CentOS-Stream-9"
+    ;;
+  "c8s")
+    tmt_plan="c8s"
+    context="CentOS Stream 8"
+    compose="CentOS-Stream-8"
     ;;
   "fedora")
     tmt_plan="fedora"
