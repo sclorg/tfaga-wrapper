@@ -83,19 +83,19 @@ case "$os_test" in
   "rhel8")
     tmt_plan="rhel8$tmt_plan_suffix"
     context="RHEL8$context_suffix"
-    compose="RHEL-8.6.0-Nightly"
+    compose="RHEL-8.8.0-Nightly"
     ;;
   "rhel9")
     tmt_plan="rhel9$tmt_plan_suffix"
     context="RHEL9$context_suffix"
-    compose="RHEL-9.1.0-Nightly"
+    compose="RHEL-9.2.0-Nightly"
     ;;
   "rhel9-unsubscribed")
     os_test="rhel9"
     dockerfile="Dockerfile.$os_test"
     tmt_plan="rhel9-unsubscribed-docker"
     context="RHEL9 - Unsubscribed host"
-    compose="RHEL-9.1.0-Nightly"
+    compose="RHEL-9.2.0-Nightly"
     ;;
   ""|*)
     echo "::error::os_test '$os_test' is not valid"
