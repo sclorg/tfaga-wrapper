@@ -65,7 +65,7 @@ runs:
 
     - name: Schedule tests for ${{ steps.working_dir.outputs.path }} - ${{ steps.vars.outputs.os_test }}
       if: ${{ steps.check_exclude_file.outputs.files_exists == 'false' && steps.check_dockerfile.outputs.files_exists == 'true' }}
-      uses: sclorg/testing-farm-as-github-action@v1
+      uses: sclorg/testing-farm-as-github-action@typescript
       with:
         api_key:  ${{ inputs[steps.vars.outputs.api_key] }}
         compose:  ${{ steps.vars.outputs.compose }}
