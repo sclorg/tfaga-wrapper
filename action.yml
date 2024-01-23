@@ -73,5 +73,6 @@ runs:
         git_ref:  ${{ steps.vars.outputs.branch }}
         tf_scope: ${{ steps.vars.outputs.tf_scope }}
         tmt_plan_regex: ${{ steps.vars.outputs.tmt_plan }}
+        update_pull_request_status: true
         pull_request_status_name: "${{ steps.vars.outputs.context }} - ${{ steps.working_dir.outputs.path }}"
         variables: "REPO_URL=${{ github.server_url }}/${{ github.repository }};REPO_NAME=${{ github.repository }};PR_NUMBER=${{ github.event.issue.number }};SINGLE_VERSION=${{ inputs.version }};OS=${{ steps.vars.outputs.os_test }};TEST_NAME=${{ steps.vars.outputs.test_name }}"
