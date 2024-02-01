@@ -53,13 +53,13 @@ runs:
 
     - name: Check if ${{ steps.working_dir.outputs.path }}/${{ steps.vars.outputs.dockerfile }} is present
       id: check_dockerfile
-      uses: andstor/file-existence-action@v2
+      uses: andstor/file-existence-action@v3
       with:
         files: "${{ steps.working_dir.outputs.path }}/${{ steps.vars.outputs.dockerfile }}"
 
     - name: Check .exclude-${{ steps.vars.outputs.os_test }} file presents
       id: check_exclude_file
-      uses: andstor/file-existence-action@v2
+      uses: andstor/file-existence-action@v3
       with:
         files: "${{ steps.working_dir.outputs.path }}/.exclude-${{ steps.vars.outputs.os_test }}"
 
