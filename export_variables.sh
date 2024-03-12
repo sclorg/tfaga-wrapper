@@ -5,7 +5,7 @@ private_ranch="rhel7 rhel8 rhel9 rhel9-unsubscribed"
 all_os="$public_ranch $private_ranch"
 
 os_test="$1" # options: centos7, c8s, c9s, fedora, rhel7, rhel8, rhel9, rhel9-unsubscribed
-test_case="$2" # options: container, openshift-3, openshift-4
+test_case="$2" # options: container, openshift-4
 if [ -z "$os_test" ] || ! echo "$all_os" | grep -q "$os_test" ; then
   echo "::error::os_test '$os_test' is not valid"
   echo "::warning::choose one of: $all_os"
@@ -19,11 +19,6 @@ case "$test_case" in
     tmt_plan_suffix="-docker"
     context_suffix=""
     test_name="test"
-    ;;
-  "openshift-3")
-    context_suffix=" - OpenShift 3"
-    tmt_plan_suffix="-openshift-3"
-    test_name="test-openshift"
     ;;
   "openshift-4")
     context_suffix=" - OpenShift 4"
