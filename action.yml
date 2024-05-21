@@ -41,17 +41,6 @@ runs:
           echo "path=$_path" >> "$GITHUB_OUTPUT"
         fi
 
-    - name: Set user defined context
-      id: user_context
-      shell: bash
-      run: |
-        ctx=${{ inputs.context }}
-        if [ "$ctx" == "" ]; then
-          echo "ctx=undefined >> "$GITHUB_OUTPUT"
-        else
-          echo "ctx=$ctx" >> "$GITHUB_OUTPUT"
-        fi
-
     - name: Checkout repo
       uses: actions/checkout@v4
       with:
@@ -63,7 +52,7 @@ runs:
     - name: Prepare needed variables
       shell: bash
       id: vars
-      run: export_variables.sh "${{ inputs.os_test }}" "${{ inputs.test_case }}" "${{ steps.user_context.outputs.ctx }}"
+      run: export_variables.sh "${{ inputs.os_test }}" "${{ inputs.test_case }}" "${{ inputs.context }}"
 
     - name: Check if ${{ steps.working_dir.outputs.path }}/${{ steps.vars.outputs.dockerfile }} is present
       id: check_dockerfile
