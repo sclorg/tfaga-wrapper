@@ -6,6 +6,7 @@ all_os="$public_ranch $private_ranch"
 
 os_test="$1" # options: centos7, c8s, c9s, fedora, rhel7, rhel8, rhel9, rhel9-unsubscribed
 test_case="$2" # options: container, openshift-4
+user_context="$3" # User can specify its own user-defined context, like 'Testing Farm - pytest - RHEL8'
 if [ -z "$os_test" ] || ! echo "$all_os" | grep -q "$os_test" ; then
   echo "::error::os_test '$os_test' is not valid"
   echo "::warning::choose one of: $all_os"
@@ -31,7 +32,10 @@ case "$test_case" in
     ;;
 esac
 
-
+context_prefix=""
+if [ -n "$user_context" ]; then
+  context_prefix="$user_context -"
+fi
 
 # public vs private ranch
 if echo "$public_ranch" | grep -q "$os_test" ; then
@@ -51,18 +55,18 @@ dockerfile=Dockerfile."$os_test"
 case "$os_test" in
   "centos7")
     tmt_plan="centos7"
-    context="CentOS7$context_suffix"
+    context="$context_prefix CentOS7$context_suffix"
     dockerfile="Dockerfile"
     compose="CentOS-7"
     ;;
   "c9s")
     tmt_plan="c9s"
-    context="CentOS Stream 9"
+    context="$context_prefix CentOS Stream 9"
     compose="CentOS-Stream-9"
     ;;
   "c8s")
     tmt_plan="c8s"
-    context="CentOS Stream 8"
+    context="$context_prefix CentOS Stream 8"
     compose="CentOS-Stream-8"
     ;;
   "fedora")
@@ -72,24 +76,24 @@ case "$os_test" in
     ;;
   "rhel7")
     tmt_plan="rhel7$tmt_plan_suffix"
-    context="RHEL7$context_suffix"
+    context="$context_prefix RHEL7$context_suffix"
     compose="RHEL-7-LatestUpdated"
     ;;
   "rhel8")
     tmt_plan="rhel8$tmt_plan_suffix"
-    context="RHEL8$context_suffix"
+    context="$context_prefix RHEL8$context_suffix"
     compose="RHEL-8.8.0-Nightly"
     ;;
   "rhel9")
     tmt_plan="rhel9$tmt_plan_suffix"
-    context="RHEL9$context_suffix"
+    context="$context_prefix RHEL9$context_suffix"
     compose="RHEL-9.2.0-Nightly"
     ;;
   "rhel9-unsubscribed")
     os_test="rhel9"
     dockerfile="Dockerfile.$os_test"
     tmt_plan="rhel9-unsubscribed-docker"
-    context="RHEL9 - Unsubscribed host"
+    context="$context_prefix RHEL9 - Unsubscribed host"
     compose="RHEL-9.2.0-Nightly"
     ;;
   ""|*)

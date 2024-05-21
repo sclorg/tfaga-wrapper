@@ -23,6 +23,9 @@ inputs:
   working_dir: # used for s2i-core and s2i-base images only
     description: ''
     required: false
+  context: # used for user-defined prefix context
+    description: ''
+    required: false
 
 runs:
   using: 'composite'
@@ -49,7 +52,7 @@ runs:
     - name: Prepare needed variables
       shell: bash
       id: vars
-      run: export_variables.sh "${{ inputs.os_test }}" "${{ inputs.test_case }}"
+      run: export_variables.sh "${{ inputs.os_test }}" "${{ inputs.test_case }}" "${{ inputs.context }}"
 
     - name: Check if ${{ steps.working_dir.outputs.path }}/${{ steps.vars.outputs.dockerfile }} is present
       id: check_dockerfile
