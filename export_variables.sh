@@ -29,7 +29,7 @@ case "$test_case" in
   "pytest")
     context_suffix=" - OpenShift 4"
     tmt_plan_suffix="-pytest"
-    test_name="test-pytest"
+    test_name="test-openshift-pytest"
     ;;
   ""|*)
     echo "::error::test_case '$test_case' is not valid"
