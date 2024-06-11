@@ -27,7 +27,7 @@ case "$test_case" in
     test_name="test-openshift-4"
     ;;
   "openshift-pytest")
-    context_suffix="PyTest - OpenShift 4"
+    context_suffix=" - PyTest - OpenShift 4"
     tmt_plan_suffix="-openshift-pytest"
     test_name="test-openshift-pytest"
     ;;
