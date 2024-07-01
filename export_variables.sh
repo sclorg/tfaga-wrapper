@@ -1,6 +1,6 @@
 #!/bin/sh
 
-public_ranch="centos7 c8s c9s fedora"
+public_ranch="centos7 c8s c9s c10s fedora"
 private_ranch="rhel7 rhel8 rhel9 rhel9-unsubscribed"
 all_os="$public_ranch $private_ranch"
 
@@ -63,6 +63,11 @@ case "$os_test" in
     context="$context_prefix CentOS7$context_suffix"
     dockerfile="Dockerfile"
     compose="CentOS-7"
+    ;;
+  "c10s")
+    tmt_plan="c10s"
+    context="$context_prefix CentOS Stream 10"
+    compose="CentOS-Stream-10"
     ;;
   "c9s")
     tmt_plan="c9s"
