@@ -1,10 +1,10 @@
 #!/bin/sh
 
-public_ranch="centos7 c8s c9s c10s fedora"
-private_ranch="rhel7 rhel8 rhel9 rhel9-unsubscribed"
+public_ranch="c8s c9s c10s fedora"
+private_ranch="rhel8 rhel9 rhel9-unsubscribed"
 all_os="$public_ranch $private_ranch"
 
-os_test="$1" # options: centos7, c8s, c9s, fedora, rhel7, rhel8, rhel9, rhel9-unsubscribed
+os_test="$1" # options:  c9s, c10s, fedora, rhel8, rhel9, rhel9-unsubscribed
 test_case="$2" # options: container, openshift-4, openshift-pytest
 user_context="$3" # User can specify its own user-defined context, like 'Testing Farm - pytest - RHEL8'
 if [ -z "$os_test" ] || ! echo "$all_os" | grep -q "$os_test" ; then
@@ -58,36 +58,20 @@ fi
 # variables based on operating system in test
 dockerfile=Dockerfile."$os_test"
 case "$os_test" in
-  "centos7")
-    tmt_plan="centos7"
-    context="$context_prefix CentOS7$context_suffix"
-    dockerfile="Dockerfile"
-    compose="CentOS-7"
+  "c9s")
+    tmt_plan="c9s"
+    context="$context_prefix CentOS Stream 9"
+    compose="CentOS-Stream-9"
     ;;
   "c10s")
     tmt_plan="c10s"
     context="$context_prefix CentOS Stream 10"
     compose="CentOS-Stream-10"
     ;;
-  "c9s")
-    tmt_plan="c9s"
-    context="$context_prefix CentOS Stream 9"
-    compose="CentOS-Stream-9"
-    ;;
-  "c8s")
-    tmt_plan="c8s"
-    context="$context_prefix CentOS Stream 8"
-    compose="CentOS-Stream-8"
-    ;;
   "fedora")
     tmt_plan="fedora"
     context="Fedora"
     compose="Fedora-latest"
-    ;;
-  "rhel7")
-    tmt_plan="rhel7$tmt_plan_suffix"
-    context="$context_prefix RHEL7$context_suffix"
-    compose="RHEL-7-LatestUpdated"
     ;;
   "rhel8")
     tmt_plan="rhel8$tmt_plan_suffix"
