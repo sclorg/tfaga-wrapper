@@ -9,7 +9,7 @@ inputs:
     description: ''
     required: true
   os_test:
-    description: 'centos7/c8s/c9s/fedora/rhel7/rhel8/rhel9/rhel9-unsubscribed'
+    description: 'c9s/c10s/fedora/rhel8/rhel9/rhel9-unsubscribed'
     required: true
   test_case:
     description: 'container/openshift-4'
