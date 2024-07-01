@@ -58,31 +58,15 @@ fi
 # variables based on operating system in test
 dockerfile=Dockerfile."$os_test"
 case "$os_test" in
-  "centos7")
-    tmt_plan="centos7"
-    context="$context_prefix CentOS7$context_suffix"
-    dockerfile="Dockerfile"
-    compose="CentOS-7"
-    ;;
   "c9s")
     tmt_plan="c9s"
     context="$context_prefix CentOS Stream 9"
     compose="CentOS-Stream-9"
     ;;
-  "c8s")
-    tmt_plan="c8s"
-    context="$context_prefix CentOS Stream 8"
-    compose="CentOS-Stream-8"
-    ;;
   "fedora")
     tmt_plan="fedora"
     context="Fedora"
     compose="Fedora-latest"
-    ;;
-  "rhel7")
-    tmt_plan="rhel7$tmt_plan_suffix"
-    context="$context_prefix RHEL7$context_suffix"
-    compose="RHEL-7-LatestUpdated"
     ;;
   "rhel8")
     tmt_plan="rhel8$tmt_plan_suffix"
