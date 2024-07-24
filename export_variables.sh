@@ -66,7 +66,8 @@ case "$os_test" in
   "c10s")
     tmt_plan="c10s"
     context="$context_prefix CentOS Stream 10"
-    compose="CentOS-Stream-10"
+    # Use CentOS-Stream-9 till this issue is not solved: https://issues.redhat.com/browse/TFT-2726
+    compose="CentOS-Stream-9"
     ;;
   "fedora")
     tmt_plan="fedora"
