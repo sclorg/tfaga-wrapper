@@ -17,24 +17,29 @@ fi
 case "$test_case" in
   "container")
     test_case="container"
-    tmt_plan_suffix="-docker"
+    tmt_plan_suffix="-docker$"
     context_suffix=""
     test_name="test"
     ;;
   "container-pytest")
     test_case="container-pytest"
-    tmt_plan_suffix="-docker-pytest"
+    tmt_plan_suffix="-docker-pytest$"
     context_suffix=" - PyTest"
     test_name="test-pytest"
     ;;
   "openshift-4")
     context_suffix=" - OpenShift 4"
-    tmt_plan_suffix="-openshift-4"
+    tmt_plan_suffix="-openshift-4$"
     test_name="test-openshift-4"
     ;;
   "openshift-pytest")
     context_suffix=" - PyTest - OpenShift 4"
-    tmt_plan_suffix="-openshift-pytest"
+    tmt_plan_suffix="-openshift-pytest$"
+    test_name="test-openshift-pytest"
+    ;;
+  "openshift-helms")
+    context_suffix=" - Helms - OpenShift 4"
+    tmt_plan_suffix="-openshift-helms$ "
     test_name="test-openshift-pytest"
     ;;
   ""|*)
