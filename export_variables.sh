@@ -1,10 +1,10 @@
 #!/bin/sh
 
 public_ranch="c8s c9s c10s fedora"
-private_ranch="rhel8 rhel9 rhel9-unsubscribed"
+private_ranch="rhel8 rhel9 rhel9-unsubscribed rhel10 rhel10-unsubscribed"
 all_os="$public_ranch $private_ranch"
 
-os_test="$1" # options:  c9s, c10s, fedora, rhel8, rhel9, rhel9-unsubscribed
+os_test="$1" # options:  c9s, c10s, fedora, rhel8, rhel9, rhel9-unsubscribed, rhel10, rhel10-unsubscribed
 test_case="$2" # options: container, openshift-4, openshift-pytest
 user_context="$3" # User can specify its own user-defined context, like 'Testing Farm - pytest - RHEL8'
 if [ -z "$os_test" ] || ! echo "$all_os" | grep -q "$os_test" ; then
@@ -100,6 +100,18 @@ case "$os_test" in
     tmt_plan="rhel9-unsubscribed-docker"
     context="$context_prefix RHEL9 - Unsubscribed host"
     compose="RHEL-9.4.0-Nightly"
+    ;;
+  "rhel10")
+    tmt_plan="rhel10$tmt_plan_suffix"
+    context="$context_prefix RHEL10$context_suffix"
+    compose="RHEL-10-Nightly"
+    ;;
+  "rhel10-unsubscribed")
+    os_test="rhel10"
+    dockerfile="Dockerfile.$os_test"
+    tmt_plan="rhel10-unsubscribed-docker"
+    context="$context_prefix RHEL10 - Unsubscribed host"
+    compose="RHEL-10-Nightly"
     ;;
   ""|*)
     echo "::error::os_test '$os_test' is not valid"
