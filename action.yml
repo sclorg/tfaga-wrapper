@@ -12,7 +12,7 @@ inputs:
     description: 'c9s/c10s/fedora/rhel8/rhel9/rhel9-unsubscribed/rhel10/rhel10-unsubscribed'
     required: true
   test_case:
-    description: 'container/openshift-4'
+    description: 'container/container-upstream/openshift-4/openshift-pytest'
     required: true
   public_api_key:
     description: ''
