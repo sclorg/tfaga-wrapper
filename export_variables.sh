@@ -21,6 +21,12 @@ case "$test_case" in
     context_suffix=""
     test_name="test"
     ;;
+  "container-fips")
+    test_case="container-fips"
+    tmt_plan_suffix="-fips-docker$"
+    context_suffix=" - FIPS Enabled"
+    test_name="test"
+    ;;
   "container-upstream")
     test_case="container-upstream"
     tmt_plan_suffix="-docker$"
