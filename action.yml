@@ -2,7 +2,7 @@
 
 name: 'Run Testing Farm as GitHub Action for SCLOrg use-cases'
 description: 'This wrapper tries to minimize lines of code needed to be written in each container repository when calling TFaGA. This should lead to code reduction, duplicity removal, easier maintaining and adding features.'
-author: 'RHSCL team'
+author: 'AppsStacks team'
 
 inputs:
   version:
@@ -12,7 +12,7 @@ inputs:
     description: 'c9s/c10s/fedora/rhel8/rhel9/rhel9-unsubscribed/rhel10/rhel10-unsubscribed'
     required: true
   test_case:
-    description: 'container/container-fips/container-upstream/openshift-4/openshift-pytest'
+    description: 'container/container-pytest/container-fips/container-upstream/openshift-4/openshift-pytest'
     required: true
   public_api_key:
     description: ''

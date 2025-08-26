@@ -5,7 +5,7 @@ private_ranch="rhel8 rhel9 rhel9-unsubscribed rhel10 rhel10-unsubscribed"
 all_os="$public_ranch $private_ranch"
 
 os_test="$1" # options:  c9s, c10s, fedora, rhel8, rhel9, rhel9-unsubscribed, rhel10, rhel10-unsubscribed
-test_case="$2" # options: container, container-upstream, openshift-4, openshift-pytest
+test_case="$2" # options: container, container-pytest, container-upstream, openshift-4, openshift-pytest
 user_context="$3" # User can specify its own user-defined context, like 'Testing Farm - pytest - RHEL8'
 if [ -z "$os_test" ] || ! echo "$all_os" | grep -q "$os_test" ; then
   echo "::error::os_test '$os_test' is not valid"
