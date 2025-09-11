@@ -110,7 +110,7 @@ case "$os_test" in
     os_test="rhel9"
     dockerfile="Dockerfile.$os_test"
     tmt_plan="rhel9-unsubscribed-docker"
-    context="$context_prefix RHEL9 - Unsubscribed host"
+    context="$context_prefix RHEL9 - Unsubscribed host$context_suffix"
     compose="RHEL-9.6.0-Nightly"
     ;;
   "rhel10")
@@ -122,7 +122,7 @@ case "$os_test" in
     os_test="rhel10"
     dockerfile="Dockerfile.$os_test"
     tmt_plan="rhel10-unsubscribed-docker"
-    context="$context_prefix RHEL10 - Unsubscribed host"
+    context="$context_prefix RHEL10 - Unsubscribed host$context_suffix"
     compose="RHEL-10-Nightly"
     ;;
   ""|*)
