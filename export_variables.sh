@@ -92,7 +92,7 @@ case "$os_test" in
     compose="CentOS-Stream-10"
     ;;
   "fedora")
-    tmt_plan="^fedora"
+    tmt_plan="/fedora"
     context="Fedora$context_suffix"
     compose="Fedora-latest"
     ;;
