@@ -87,7 +87,7 @@ case "$os_test" in
     compose="CentOS-Stream-9"
     ;;
   "c10s")
-    tmt_plan="^c10s"
+    tmt_plan="/c10s"
     context="$context_prefix CentOS Stream 10$context_suffix"
     compose="CentOS-Stream-10"
     ;;
