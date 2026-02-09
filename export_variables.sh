@@ -82,7 +82,7 @@ fi
 dockerfile=Dockerfile."$os_test"
 case "$os_test" in
   "c9s")
-    tmt_plan="^c9s"
+    tmt_plan="/c9s"
     context="$context_prefix CentOS Stream 9$context_suffix"
     compose="CentOS-Stream-9"
     ;;
