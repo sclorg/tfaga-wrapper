@@ -9,7 +9,7 @@ inputs:
     description: ''
     required: true
   os_test:
-    description: 'c9s/c10s/fedora/rhel8/rhel9/rhel9-unsubscribed/rhel10/rhel10-unsubscribed'
+    description: 'c9s/c10s/c11s/fedora/rhel8/rhel9/rhel9-unsubscribed/rhel10/rhel10-unsubscribed/rhel11/rhel11-unsubscribed'
     required: true
   test_case:
     description: 'container/container-pytest/container-fips/container-upstream/openshift-pytest'
@@ -75,7 +75,7 @@ runs:
         git_url:  ${{ steps.vars.outputs.tmt_repo }}
         git_ref:  ${{ steps.vars.outputs.branch }}
         tf_scope: ${{ steps.vars.outputs.tf_scope }}
-        tmt_plan_regex: ${{ steps.vars.outputs.tmt_plan }}
+        tmt_plan_regex: "/${{ steps.vars.outputs.tmt_plan }}"
         update_pull_request_status: true
         create_issue_comment: true
         pull_request_status_name: "${{ steps.vars.outputs.context }} - ${{ steps.working_dir.outputs.path }}"
