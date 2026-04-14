@@ -1,11 +1,11 @@
 #!/bin/sh
 
-public_ranch="c8s c9s c10s fedora"
-private_ranch="rhel8 rhel9 rhel9-unsubscribed rhel10 rhel10-unsubscribed"
+public_ranch="c8s c9s c10s c11s fedora"
+private_ranch="rhel8 rhel9 rhel9-unsubscribed rhel10 rhel10-unsubscribed rhel11 rhel11-unsubscribed"
 all_os="$public_ranch $private_ranch"
 
-os_test="$1" # options:  c9s, c10s, fedora, rhel8, rhel9, rhel9-unsubscribed, rhel10, rhel10-unsubscribed
-test_case="$2" # options: container, container-pytest, container-upstream, openshift-4, openshift-pytest
+os_test="$1" # options:  c9s, c10s, c11s, fedora, rhel8, rhel9, rhel9-unsubscribed, rhel10, rhel10-unsubscribed, rhel11, rhel11-unsubscribed
+test_case="$2" # options: container, container-pytest, container-upstream, openshift-pytest
 user_context="$3" # User can specify its own user-defined context, like 'Testing Farm - pytest - RHEL8'
 if [ -z "$os_test" ] || ! echo "$all_os" | grep -q "$os_test" ; then
   echo "::error::os_test '$os_test' is not valid"
@@ -77,17 +77,23 @@ fi
 dockerfile=Dockerfile."$os_test"
 case "$os_test" in
   "c9s")
-    tmt_plan="/c9s"
+    tmt_plan="c9s"
     context="$context_prefix CentOS Stream 9$context_suffix"
     compose="CentOS-Stream-9"
     ;;
   "c10s")
-    tmt_plan="/c10s"
+    tmt_plan="c10s"
     context="$context_prefix CentOS Stream 10$context_suffix"
     compose="CentOS-Stream-10"
     ;;
+  "c11s")
+    tmt_plan="c11s"
+    context="$context_prefix CentOS Stream 11$context_suffix"
+    # TODO: update compose once CentOS Stream 11 is released
+    compose="CentOS-Stream-10"
+    ;;
   "fedora")
-    tmt_plan="/fedora"
+    tmt_plan="fedora"
     context="Fedora$context_suffix"
     compose="Fedora-latest"
     ;;
@@ -113,11 +119,25 @@ case "$os_test" in
     context="$context_prefix RHEL10$context_suffix"
     compose="RHEL-10.2-Nightly"
     ;;
+  "rhel11")
+    tmt_plan="rhel11$tmt_plan_suffix"
+    context="$context_prefix RHEL11$context_suffix"
+    # TODO: update compose once RHEL 11 is released
+    compose="RHEL-10.2-Nightly"
+    ;;
   "rhel10-unsubscribed")
     os_test="rhel10"
     dockerfile="Dockerfile.$os_test"
     tmt_plan="rhel10-unsubscribed-docker"
     context="$context_prefix RHEL10 - Unsubscribed host$context_suffix"
+    compose="RHEL-10.2-Nightly"
+    ;;
+  "rhel11-unsubscribed")
+    os_test="rhel11"
+    dockerfile="Dockerfile.$os_test"
+    tmt_plan="rhel11-unsubscribed-docker"
+    context="$context_prefix RHEL11 - Unsubscribed host$context_suffix"
+    # TODO: update compose once RHEL 11 is released
     compose="RHEL-10.2-Nightly"
     ;;
   ""|*)
